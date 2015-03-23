@@ -18,6 +18,17 @@ public class Test {
 		for(int i=0; i<classList.size(); i++)
 		{
 			System.out.println("Class Name: " + classList.get(i).getClassName());
+			System.out.println("ANA(" + classList.get(i).getClassName() + ") = "+ classList.get(i).ANA());
+			System.out.println("NOM(" + classList.get(i).getClassName() + ") = ");
+			System.out.println("NOA(" + classList.get(i).getClassName() + ") = ");
+			System.out.println("ITC(" + classList.get(i).getClassName() + ") = "+ classList.get(i).ITC());
+			System.out.println("ETC(" + classList.get(i).getClassName() + ") = ");
+			System.out.println("CAC(" + classList.get(i).getClassName() + ") = ");
+			System.out.println("DIT(" + classList.get(i).getClassName() + ") = ");
+			System.out.println("CLD(" + classList.get(i).getClassName() + ") = ");
+			System.out.println("NOC(" + classList.get(i).getClassName() + ") = ");
+			System.out.println("NOD(" + classList.get(i).getClassName() + ") = ");
+			
 			for(int j =0; j<classList.get(i).getListAttribute().size(); j++)
 			{
 				System.out.println("\tAttribute #" + j + classList.get(i).getListAttribute().get(j));
@@ -31,7 +42,7 @@ public class Test {
 		}
 		
 		
-                /////////// 		PRINT TEST -- RELATIONS 				///////////////
+        /////////// 		PRINT TEST -- RELATIONS 				///////////////
 		/*To test, we go through all the classes, and print out their listAggregation attribute /*
 		 * It should only appear for the host class(the one specified as the Container
 		 */
@@ -67,12 +78,6 @@ public class Test {
 			{
 				System.out.println(mod.getListClass().get(i).getListGeneralization().get(j));
 			}
-		}
-		
-		
-		/////////// 		PRINT TEST -- ANA 				///////////////
-		for(int i=0; i<mod.getListClass().size();i++){
-			System.out.println("ANA CLASSE #" + (i+1) + ":"+mod.getListClass().get(i).ANA());
 		}
 		
 	}

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Operation {
 	private String operationName;
-	private final ArrayList<DataItem> parameters = new ArrayList<>();
+	private final ArrayList<DataItem> parameters = new ArrayList<DataItem>();
 	private String operationReturnType;
 	
     public Operation() {};
@@ -30,6 +30,12 @@ public class Operation {
     public void setOperationReturnType(String operationReturnType) {
         this.operationReturnType = operationReturnType;
     }
+    
+    //EXTENSION
+    public ArrayList<DataItem> getParameter(){
+    	return this.parameters;
+    }
+    //FIN EXTENSION
 	
     public String printOperation(){
 	String result = operationReturnType + " " + operationName+ "(";

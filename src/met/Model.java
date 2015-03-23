@@ -5,13 +5,13 @@ import java.util.ArrayList;
 public class Model {
 
     private String modelName;
-    private ArrayList<Classe> listClass;
+    static private ArrayList<Classe> listClass;
 
     public Model() {};	
 	
     public Model(String modelName) {
         this.modelName = modelName;
-        this.listClass = new ArrayList<>();
+        listClass = new ArrayList<Classe>();
     };
 		
     public Classe getClassFromName(String className) {
@@ -31,11 +31,21 @@ public class Model {
         return this.modelName;
     }
 
-    public ArrayList<Classe> getListClass() {
+    static public ArrayList<Classe> getListClass() {
         return listClass;
     }
 
     public void addClass(Classe modClass) {
         listClass.add(modClass);
+    }
+    
+    public int test(){
+    	int result=0;
+  
+    	for (int i = 0; i<listClass.size();i++){
+    		
+    	}
+    	
+    	return result;
     }
 }

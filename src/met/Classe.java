@@ -10,6 +10,7 @@ public class Classe {
     private final ArrayList<Association> listAssociation;
     private final ArrayList<Generalisation> listGeneralization;
     private ArrayList<Aggregation> listAggregation;
+    private ArrayList<DataItem> listParameter = new ArrayList<DataItem>();
 
     public Classe() {
         this.listGeneralization = new ArrayList<>();
@@ -122,10 +123,12 @@ public class Classe {
         return this.listOperation;
     }
     
-    //FIN EXTENSION
-    public int ANA(){
-    	int result = 0;  	
+    // ANA(ci) : Nombre moyen d’arguments des méthodes locales pour la
+    //classe ci.
+    public double ANA(){
+    	double result = 0;  	
     	int divisor = listOperation.size();
+    	System.out.println("nombre de methodes locales = " + divisor);
     	
     	if(divisor == 0){
     		return 0;
@@ -133,8 +136,33 @@ public class Classe {
     	for(int i = 0; i<listOperation.size();i++){
     		result += listOperation.get(i).getNumParameters(); 		
     	}
-    	
+    	System.out.println("nombre total d'arguments = " + result);
     	result = result/divisor;   	
+    	return result;
+    }
+    
+    //ITC(ci) : Nombre de fois où d’autres classes du diagramme
+    //apparaissent comme types des arguments des méthodes de ci.
+    public int ITC(){
+    	int result = 0;
+    	
+    	for(int i = 0; i < listOperation.size(); i++){
+    		listParameter = listOperation.get(i).getParameter();
+    		
+    		for(int j = 0; j<listParameter.size();j++){
+    			
+    			for(int x = 0; x<Model.getListClass().size(); x++){
+					
+    				String nameClass = Model.getListClass().get(x).getClassName();
+					String attributeType = listParameter.get(j).getAttributeType();
+					
+    				if(nameClass.equals(attributeType)){
+    					result++;
+    				}
+    			}
+    		}	
+    	}
+    	   	
     	return result;
     }
     //FIN EXTENSION
