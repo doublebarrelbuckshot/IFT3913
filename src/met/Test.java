@@ -18,16 +18,21 @@ public class Test {
 		for(int i=0; i<classList.size(); i++)
 		{
 			System.out.println("Class Name: " + classList.get(i).getClassName());
-			System.out.println("ANA(" + classList.get(i).getClassName() + ") = "+ classList.get(i).ANA());
-			System.out.println("NOM(" + classList.get(i).getClassName() + ") = ");
-			System.out.println("NOA(" + classList.get(i).getClassName() + ") = ");
-			System.out.println("ITC(" + classList.get(i).getClassName() + ") = "+ classList.get(i).ITC());
-			System.out.println("ETC(" + classList.get(i).getClassName() + ") = "+ classList.get(i).ETC());
-			System.out.println("CAC(" + classList.get(i).getClassName() + ") = ");
-			System.out.println("DIT(" + classList.get(i).getClassName() + ") = ");
-			System.out.println("CLD(" + classList.get(i).getClassName() + ") = ");
-			System.out.println("NOC(" + classList.get(i).getClassName() + ") = ");
-			System.out.println("NOD(" + classList.get(i).getClassName() + ") = ");
+			
+			System.out.println("--------------------------------------------------");
+			
+			System.out.println("\tANA(" + classList.get(i).getClassName() + ") = "+ classList.get(i).ANA());
+			System.out.println("\tNOM(" + classList.get(i).getClassName() + ") = "+ classList.get(i).NOM());
+			System.out.println("\tNOA(" + classList.get(i).getClassName() + ") = "+ classList.get(i).NOA());
+			System.out.println("\tITC(" + classList.get(i).getClassName() + ") = "+ classList.get(i).ITC());
+			System.out.println("\tETC(" + classList.get(i).getClassName() + ") = "+ classList.get(i).ETC());
+			System.out.println("\tCAC(" + classList.get(i).getClassName() + ") = "+ classList.get(i).CAC());
+			System.out.println("\tDIT(" + classList.get(i).getClassName() + ") = "+ classList.get(i).DIT());
+			System.out.println("\tCLD(" + classList.get(i).getClassName() + ") = "+ classList.get(i).CLD());
+			System.out.println("\tNOC(" + classList.get(i).getClassName() + ") = "+ classList.get(i).NOC());
+			System.out.println("\tNOD(" + classList.get(i).getClassName() + ") = "+ classList.get(i).NOD());
+			
+			System.out.println("--------------------------------------------------");
 			
 			for(int j =0; j<classList.get(i).getListAttribute().size(); j++)
 			{
@@ -38,7 +43,8 @@ public class Test {
 			{
 				System.out.println("\tOperation #" + j + "\t" +classList.get(i).getListOperation().get(j));
 			}
-			System.out.println("******************");
+			
+			System.out.println("\n************************************");
 		}
 		
 		

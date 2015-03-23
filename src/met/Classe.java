@@ -123,21 +123,41 @@ public class Classe {
         return this.listOperation;
     }
     
-    // ANA(ci) : Nombre moyen d’arguments des méthodes locales pour la
+    //ANA(ci) : Nombre moyen d’arguments des méthodes locales pour la
     //classe ci.
     public double ANA(){
     	double result = 0;  	
     	int divisor = listOperation.size();
-    	System.out.println("nombre de methodes locales = " + divisor);
     	
     	if(divisor == 0){
     		return 0;
     	}
-    	for(int i = 0; i<listOperation.size();i++){
-    		result += listOperation.get(i).getNumParameters(); 		
-    	}
-    	System.out.println("nombre total d'arguments = " + result);
-    	result = result/divisor;   	
+    	else{
+	    	for(int i = 0; i<listOperation.size();i++){
+	    		result += listOperation.get(i).getNumParameters(); 		
+	    	}
+	    	result = result/divisor;
+	    }   	
+    	
+    	return result;
+    }
+    
+    //NOM(ci) : Nombre de méthodes locales/héritées de la classe
+    //ci. Dans le cas où une méthode est héritée et redéfinie localement (même
+    //nom, même ordre et types des arguments et même type de retour), elle ne
+    //compte qu’une fois.
+    
+    public int NOM(){
+    	int result = 0;
+    	
+    	return result;
+    }
+    
+    //3- NOA(ci) : Nombre d’attributs locaux/hérités de la classe ci.
+    
+    public int NOA(){
+    	int result = listAttribute.size();
+    	
     	return result;
     }
     
@@ -190,5 +210,59 @@ public class Classe {
     	
     	return result;
     }
+    
+    //CAC(ci) : Nombre d’associations (incluant les agrégations)
+    //locales/héritées auxquelles participe une classe ci.
+    
+    public int CAC(){
+    	int result = 0;
+    	
+    	//TO DO
+    	
+    	return result;
+    }
+    
+    //DIT(ci) : Taille du chemin le plus long reliant une classe ci à une
+    //classe racine dans le graphe d’héritage.
+    
+    public int DIT(){
+    	int result = 0;
+    	
+    	//TO DO
+    	
+    	return result;
+    }
+    
+    //CLD(ci) : Taille du chemin le plus long reliant une classe ci à une
+    //classe feuille dans le graphe d’héritage.
+    
+    public int CLD(){
+    	int result = 0;
+    	
+    	//TO DO
+    	
+    	return result;
+    }
+    
+    //NOC(ci) : Nombre de sous-classes directes de ci.
+    
+    public int NOC(){
+    	int result = 0;
+    	
+    	//TO DO
+    	
+    	return result;
+    }
+    
+    //NOD(ci) : Nombre de sous-classes directes et indirectes de ci.
+    
+    public int NOD(){
+    	int result = 0;
+    	
+    	//TO DO
+    	
+    	return result;
+    }
+    
     //FIN EXTENSION
 }
