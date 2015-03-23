@@ -165,5 +165,30 @@ public class Classe {
     	   	
     	return result;
     }
+    
+    //ETC(ci) : Nombre de fois où ci apparaît comme type des arguments
+    //dans les méthodes des autres classes du diagramme.
+    
+    public int ETC(){
+    	int result = 0;
+    	String myClassName = getClassName();
+    	
+    	for(int i = 0; i < Model.getListClass().size(); i++){
+    		for(int j = 0; j< Model.getListClass().get(i).getListOperation().size(); j++){
+    			
+    			listParameter = Model.getListClass().get(i).getListOperation().get(j).getParameter();
+    			
+    			for(int x = 0; x<listParameter.size();x++){
+    				String attributeType = listParameter.get(x).getAttributeType();
+    				
+    				if(attributeType.equals(myClassName)){
+    					result++;
+    				}		
+    			}
+    		}
+    	}
+    	
+    	return result;
+    }
     //FIN EXTENSION
 }

@@ -22,7 +22,7 @@ public class Test {
 			System.out.println("NOM(" + classList.get(i).getClassName() + ") = ");
 			System.out.println("NOA(" + classList.get(i).getClassName() + ") = ");
 			System.out.println("ITC(" + classList.get(i).getClassName() + ") = "+ classList.get(i).ITC());
-			System.out.println("ETC(" + classList.get(i).getClassName() + ") = ");
+			System.out.println("ETC(" + classList.get(i).getClassName() + ") = "+ classList.get(i).ETC());
 			System.out.println("CAC(" + classList.get(i).getClassName() + ") = ");
 			System.out.println("DIT(" + classList.get(i).getClassName() + ") = ");
 			System.out.println("CLD(" + classList.get(i).getClassName() + ") = ");
