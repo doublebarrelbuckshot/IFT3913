@@ -16,6 +16,12 @@ public class Operation {
     public String getOperationName() {
         return this.operationName;
     }
+    
+    //EXTENSION
+    public int getNumParameters(){
+    	return this.parameters.size();
+    }
+    //FIN EXTENSION
 
     public void addParameter(DataItem DI) {
         parameters.add(DI);

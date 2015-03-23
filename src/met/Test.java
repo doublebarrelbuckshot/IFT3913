@@ -1,4 +1,3 @@
-//ALLOO
 
 package met;
 
@@ -68,6 +67,13 @@ public class Test {
 			{
 				System.out.println(mod.getListClass().get(i).getListGeneralization().get(j));
 			}
-		}	
+		}
+		
+		
+		/////////// 		PRINT TEST -- ANA 				///////////////
+		for(int i=0; i<mod.getListClass().size();i++){
+			System.out.println("ANA CLASSE #" + (i+1) + ":"+mod.getListClass().get(i).ANA());
+		}
+		
 	}
 }

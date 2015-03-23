@@ -121,4 +121,21 @@ public class Classe {
     public ArrayList<Operation> getListOperation() {
         return this.listOperation;
     }
+    
+    //FIN EXTENSION
+    public int ANA(){
+    	int result = 0;  	
+    	int divisor = listOperation.size();
+    	
+    	if(divisor == 0){
+    		return 0;
+    	}
+    	for(int i = 0; i<listOperation.size();i++){
+    		result += listOperation.get(i).getNumParameters(); 		
+    	}
+    	
+    	result = result/divisor;   	
+    	return result;
+    }
+    //FIN EXTENSION
 }
