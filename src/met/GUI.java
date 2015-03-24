@@ -69,7 +69,7 @@ public class GUI extends JFrame implements ListSelectionListener, ActionListener
 		/*
 		 * SETUP FOR NORTH AREA (FILE NAME AND BUTTON)
 		 */
-		JButton loadBtn = new JButton("Charger fichier");
+		JButton loadBtn = new JButton("Charger un fichier");
 		JPanel loadPanel = new JPanel();
 		loadPanel.add(loadBtn);
 		loadBtn.addActionListener(this);
@@ -200,7 +200,7 @@ public class GUI extends JFrame implements ListSelectionListener, ActionListener
 
 	public  void loadGUIElements( ) {
 
-		ArrayList<Classe> classes = mod.getListClass();
+		ArrayList<Classe> classes = Model.getListClass();
 
 		/*
 		 * SETUP FOR CLASSES JLIST
@@ -237,7 +237,7 @@ public class GUI extends JFrame implements ListSelectionListener, ActionListener
 		generalizationsDefaultModel.clear();
 
 		this.generalization.stream().forEach((item) -> {
-			item.getChildren().stream().forEach((child) -> {
+			Generalisation.getChildren().stream().forEach((child) -> {
 				generalizationsDefaultModel.addElement(child);
 			});
 		});
@@ -282,8 +282,7 @@ public class GUI extends JFrame implements ListSelectionListener, ActionListener
 					programChanged = true;
 
 					String test = listClasses.getSelectedValue();
-					System.out.println("you clicked on " + test);
-					Classe newlyClickedClass = mod.getClassFromName(test);
+					Classe newlyClickedClass = Model.getClassFromName(test);
 					this.generalization = newlyClickedClass.getListGeneralization();
 					this.attribute = newlyClickedClass.getListAttribute();
 					this.operation = newlyClickedClass.getListOperation();
@@ -320,7 +319,6 @@ public class GUI extends JFrame implements ListSelectionListener, ActionListener
 					listOperations.clearSelection();
 
 					String test = listRelations.getSelectedValue();
-					System.out.println("you clicked on " + test);
 					Relation newlyClickedRelation = (Relation)relation.get(listRelations.getSelectedIndex());
 					descriptionTextArea.setText(newlyClickedRelation.recreateCode());
 					programChanged = false;
@@ -337,8 +335,7 @@ public class GUI extends JFrame implements ListSelectionListener, ActionListener
 					listOperations.clearSelection();
 
 					String test = listClasses.getSelectedValue();
-					System.out.println("you clicked on " + test);
-					Classe clickedAttributeClass = mod.getClassFromName(test);
+					Classe clickedAttributeClass = Model.getClassFromName(test);
 
 					descriptionTextArea.setText(clickedAttributeClass.recreateAttributeCode());
 					programChanged = false;
@@ -355,8 +352,7 @@ public class GUI extends JFrame implements ListSelectionListener, ActionListener
 					listOperations.clearSelection();
 
 					String test = listClasses.getSelectedValue();
-					System.out.println("you clicked on " + test + " in listGeneralizations");
-					Classe clickedAttributeClass = mod.getClassFromName(test);
+					Classe clickedAttributeClass = Model.getClassFromName(test);
 
 					descriptionTextArea.setText(clickedAttributeClass.recreateGeneralizationCode());
 					programChanged = false;
@@ -372,8 +368,7 @@ public class GUI extends JFrame implements ListSelectionListener, ActionListener
 					listGeneralizations.clearSelection();
 
 					String test = listClasses.getSelectedValue();
-					System.out.println("you clicked on " + test + " in listOperations");
-					Classe clickedAttributeClass = mod.getClassFromName(test);
+					Classe clickedAttributeClass = Model.getClassFromName(test);
 
 					descriptionTextArea.setText(clickedAttributeClass.recreateOperationCode());
 					programChanged = false;

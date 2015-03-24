@@ -10,7 +10,7 @@ public class Test {
 	{
 		System.out.println("********************BEGIN TEST********************");
 		System.out.println("Model Name: " + mod.getModelName());
-		ArrayList<Classe> classList = mod.getListClass();
+		ArrayList<Classe> classList = Model.getListClass();
 		
 		/////////// 		PRINT TEST -- ATTRIBUTES AND OPERATIONS 				///////////////
 		/*To test, we go through all the classes, and print out their listAttribute and listOperations arrays /*
@@ -29,6 +29,13 @@ public class Test {
 			System.out.println("\tCAC(" + classList.get(i).getClassName() + ") = "+ classList.get(i).CAC());
 			System.out.println("\tDIT(" + classList.get(i).getClassName() + ") = "+ classList.get(i).DIT());
 			System.out.println("\tCLD(" + classList.get(i).getClassName() + ") = "+ classList.get(i).CLD());
+			
+			System.out.println("--------------------------------------------------");
+			
+			System.out.println("SubClasses : " + Generalisation.getChildren());
+			
+			System.out.println("--------------------------------------------------");
+			
 			System.out.println("\tNOC(" + classList.get(i).getClassName() + ") = "+ classList.get(i).NOC());
 			System.out.println("\tNOD(" + classList.get(i).getClassName() + ") = "+ classList.get(i).NOD());
 			
@@ -36,12 +43,14 @@ public class Test {
 			
 			for(int j =0; j<classList.get(i).getListAttribute().size(); j++)
 			{
-				System.out.println("\tAttribute #" + j + classList.get(i).getListAttribute().get(j));
+				System.out.println("\tAttribute #" + (j+1) + classList.get(i).getListAttribute().get(j));
 			} 
+			
+			System.out.println("--------------------------------------------------");
 
 			for(int j =0; j<classList.get(i).getListOperation().size(); j++)
 			{
-				System.out.println("\tOperation #" + j + "\t" +classList.get(i).getListOperation().get(j));
+				System.out.println("\tOperation #" + (j+1) + "\t" +classList.get(i).getListOperation().get(j));
 			}
 			
 			System.out.println("\n************************************");

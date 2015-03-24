@@ -6,11 +6,9 @@ import java.util.ArrayList;
 public class Aggregation implements Relation {
 
     private Role container;
-    private final ArrayList<Role> listRole;
+    static private final ArrayList<Role> listRole = new ArrayList<Role>();
 
-    public Aggregation() {
-        this.listRole = new ArrayList<>();
-    };
+    public Aggregation() {};
 
     public void setContainer(Role container) {
         this.container = container;
@@ -54,10 +52,10 @@ public class Aggregation implements Relation {
         this.listRole.add(role);
     }
 
-    public ArrayList<Role> getListRole() {
-        return this.listRole;
+    static public ArrayList<Role> getListRole() {
+        return listRole;
     }
-
+    
     @Override
     public String toString() {
         String result = "Container: " + container.getClassName()

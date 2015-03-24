@@ -64,13 +64,13 @@ public class Classe {
 
         for (Generalisation listGeneralization1 : listGeneralization) {
 
-            result = "GENERALIZATION " + listGeneralization1.getParent()
+            result = "GENERALIZATION " + Generalisation.getParent()
                     + "\n\tSUBCLASSES ";
 
-            for (int j = 0; j < listGeneralization1.getChildren().size(); j++) {
-                result += listGeneralization1.getChildren().get(j);
+            for (int j = 0; j < Generalisation.getChildren().size(); j++) {
+                result += Generalisation.getChildren().get(j);
 
-                if (j < listGeneralization1.getChildren().size() - 1) {
+                if (j < Generalisation.getChildren().size() - 1) {
                     result += ", ";
                 }
             }
@@ -145,20 +145,18 @@ public class Classe {
     //NOM(ci) : Nombre de méthodes locales/héritées de la classe
     //ci. Dans le cas où une méthode est héritée et redéfinie localement (même
     //nom, même ordre et types des arguments et même type de retour), elle ne
-    //compte qu’une fois.
-    
+    //compte qu’une fois.    
     public int NOM(){
     	int result = 0;
+    	
+    	//TO DO
     	
     	return result;
     }
     
-    //3- NOA(ci) : Nombre d’attributs locaux/hérités de la classe ci.
-    
-    public int NOA(){
-    	int result = listAttribute.size();
-    	
-    	return result;
+    //NOA(ci) : Nombre d’attributs locaux/hérités de la classe ci.
+    public int NOA(){ 
+    	return listAttribute.size();
     }
     
     //ITC(ci) : Nombre de fois où d’autres classes du diagramme
@@ -187,8 +185,7 @@ public class Classe {
     }
     
     //ETC(ci) : Nombre de fois où ci apparaît comme type des arguments
-    //dans les méthodes des autres classes du diagramme.
-    
+    //dans les méthodes des autres classes du diagramme.  
     public int ETC(){
     	int result = 0;
     	String myClassName = getClassName();
@@ -212,19 +209,20 @@ public class Classe {
     }
     
     //CAC(ci) : Nombre d’associations (incluant les agrégations)
-    //locales/héritées auxquelles participe une classe ci.
-    
+    //locales/héritées auxquelles participe une classe ci.   
     public int CAC(){
     	int result = 0;
     	
-    	//TO DO
+    	for(int i = 0; i < Model.getListClass().size(); i++){
+    			Classe myClass =  Model.getListClass().get(i);
+    			//System.out.println(Aggregation.getListRole());
+    	}
     	
     	return result;
     }
     
     //DIT(ci) : Taille du chemin le plus long reliant une classe ci à une
-    //classe racine dans le graphe d’héritage.
-    
+    //classe racine dans le graphe d’héritage.    
     public int DIT(){
     	int result = 0;
     	
@@ -234,8 +232,7 @@ public class Classe {
     }
     
     //CLD(ci) : Taille du chemin le plus long reliant une classe ci à une
-    //classe feuille dans le graphe d’héritage.
-    
+    //classe feuille dans le graphe d’héritage.   
     public int CLD(){
     	int result = 0;
     	
@@ -245,21 +242,25 @@ public class Classe {
     }
     
     //NOC(ci) : Nombre de sous-classes directes de ci.
-    
     public int NOC(){
-    	int result = 0;
     	
-    	//TO DO
-    	
-    	return result;
+    	//PROBLEM getChildren retourne la meme liste de children pour toutes les classes...
+    
+    	return Generalisation.getChildren().size();
     }
     
     //NOD(ci) : Nombre de sous-classes directes et indirectes de ci.
     
     public int NOD(){
-    	int result = 0;
+    	int result = NOC();
     	
-    	//TO DO
+    	//PROBLEM supposer devenir ok mais rentre dans une boucle infinie pour le moment à cause de getChildren qui ne fonctionne pas...
+    	
+    	for(int i = 0; i<Generalisation.getChildren().size(); i++){
+    		//result += Model.getClassFromName(Generalisation.getChildren().get(i)).NOD();
+    		//System.out.println("Sous-Classe :" + Generalisation.getChildren().get(i));
+    		//System.out.println("Nombre de sous-classe :" + className.NOC());
+    	}
     	
     	return result;
     }

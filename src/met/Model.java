@@ -14,7 +14,7 @@ public class Model {
         listClass = new ArrayList<Classe>();
     };
 		
-    public Classe getClassFromName(String className) {
+    static public Classe getClassFromName(String className) {
         for (Classe listClas : listClass) {
             if (listClas.getClassName().equals(className)) {
                 return listClas;
