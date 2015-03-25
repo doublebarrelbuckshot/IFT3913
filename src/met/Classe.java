@@ -62,7 +62,7 @@ public class Classe {
 
         String result = "";
 
-        for (Generalisation listGeneralization1 : listGeneralization) {
+        for (@SuppressWarnings("unused") Generalisation listGeneralization1 : listGeneralization) {
 
             result = "GENERALIZATION " + Generalisation.getParent()
                     + "\n\tSUBCLASSES ";
