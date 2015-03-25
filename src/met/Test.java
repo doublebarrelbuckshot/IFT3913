@@ -32,6 +32,7 @@ public class Test {
 			
 			System.out.println("--------------------------------------------------");
 			
+			System.out.println("ClassParent : " + Generalisation.getParent());
 			System.out.println("SubClasses : " + Generalisation.getChildren());
 			
 			System.out.println("--------------------------------------------------");
@@ -61,11 +62,11 @@ public class Test {
 		/*To test, we go through all the classes, and print out their listAggregation attribute /*
 		 * It should only appear for the host class(the one specified as the Container
 		 */
-		for(int i =0; i<mod.getListClass().size(); i++)
+		for(int i =0; i<Model.getListClass().size(); i++)
 		{
-			for(int j=0; j<mod.getListClass().get(i).getListAssociation().size(); j++)
+			for(int j=0; j<Model.getListClass().get(i).getListAssociation().size(); j++)
 			{
-				System.out.println("CLASS NAME: " + mod.getListClass().get(i).getClassName() + "\t" + mod.getListClass().get(i).getListAssociation().get(j));
+				System.out.println("CLASS NAME: " + Model.getListClass().get(i).getClassName() + "\t" + Model.getListClass().get(i).getListAssociation().get(j));
 			}
 		}
 		
@@ -75,11 +76,11 @@ public class Test {
 		/*To test, we go through all the classes, and print out their listAggregation attribute /*
 		 * It should only appear for the host class(the one specified as the Container
 		 */
-		for(int i =0; i<mod.getListClass().size(); i++)
+		for(int i =0; i<Model.getListClass().size(); i++)
 		{
-			for(int j=0; j<mod.getListClass().get(i).getListAggregation().size(); j++)
+			for(int j=0; j<Model.getListClass().get(i).getListAggregation().size(); j++)
 			{
-				System.out.println(mod.getListClass().get(i).getListAggregation().get(j));
+				System.out.println(Model.getListClass().get(i).getListAggregation().get(j));
 			}
 		}
 		
@@ -87,11 +88,11 @@ public class Test {
 		/*To test, we go through all the classes, and print out their listGeneralization attribute /*
 		 * It should only appear for the host class(the one specified as the Container
 		 */
-		for(int i =0; i<mod.getListClass().size(); i++)
+		for(int i =0; i<Model.getListClass().size(); i++)
 		{
-			for(int j=0; j<mod.getListClass().get(i).getListGeneralization().size(); j++)
+			for(int j=0; j<Model.getListClass().get(i).getListGeneralization().size(); j++)
 			{
-				System.out.println(mod.getListClass().get(i).getListGeneralization().get(j));
+				System.out.println(Model.getListClass().get(i).getListGeneralization().get(j));
 			}
 		}
 		
