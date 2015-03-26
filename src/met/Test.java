@@ -32,8 +32,10 @@ public class Test {
 			
 			System.out.println("--------------------------------------------------");
 			
-			System.out.println("ClassParent : " + Generalisation.getParent());
-			System.out.println("SubClasses : " + Generalisation.getChildren());
+			//System.out.println("ClassParent : " + Generalisation.getParent());
+			if (classList.get(i).getListGeneralization().size()>0){
+			System.out.println("SubClasses : " + classList.get(i).getListGeneralization().get(0).getChildren().get(0));} //Generalisation.getChildren());
+			//Generalisation.
 			
 			System.out.println("--------------------------------------------------");
 			

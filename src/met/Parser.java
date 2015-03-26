@@ -399,7 +399,7 @@ public class Parser {
 			ArrayList<String> listOfChildren = tempGeneralizations.get(i).getChildren();
 			for(int j =0; j<listOfChildren.size(); j++)
 			{
-				Classe childClass = mod.getClassFromName(listOfChildren.get(i));
+				Classe childClass = mod.getClassFromName(listOfChildren.get(j));
 				if(childClass == null)
 					throw new MetricSyntaxException("ERROR: DELCARED SUBCLASS DOESN'T EXIST", gui);
 

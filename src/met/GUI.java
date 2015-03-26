@@ -237,7 +237,7 @@ public class GUI extends JFrame implements ListSelectionListener, ActionListener
 		generalizationsDefaultModel.clear();
 
 		this.generalization.stream().forEach((item) -> {
-			Generalisation.getChildren().stream().forEach((child) -> {
+			item.getChildren().stream().forEach((child) -> {
 				generalizationsDefaultModel.addElement(child);
 			});
 		});

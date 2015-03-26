@@ -58,19 +58,40 @@ public class Classe {
         return result;
     }
 
+//    public String recreateGeneralizationCode() {
+//
+//        String result = "";
+//
+//        for (@SuppressWarnings("unused") Generalisation listGeneralization1 : listGeneralization) {
+//
+//            result = "GENERALIZATION " + listGeneralization..getParent()
+//                    + "\n\tSUBCLASSES ";
+//
+//            for (int j = 0; j < Generalisation.getChildren().size(); j++) {
+//                result += Generalisation.getChildren().get(j);
+//
+//                if (j < Generalisation.getChildren().size() - 1) {
+//                    result += ", ";
+//                }
+//            }
+//            result += ";";
+//        }
+//        return result;
+//    }
+    
     public String recreateGeneralizationCode() {
 
         String result = "";
 
-        for (@SuppressWarnings("unused") Generalisation listGeneralization1 : listGeneralization) {
+        for (Generalisation listGeneralization1 : listGeneralization) {
 
-            result = "GENERALIZATION " + Generalisation.getParent()
+            result = "GENERALIZATION " + listGeneralization1.getParent()
                     + "\n\tSUBCLASSES ";
 
-            for (int j = 0; j < Generalisation.getChildren().size(); j++) {
-                result += Generalisation.getChildren().get(j);
+            for (int j = 0; j < listGeneralization1.getChildren().size(); j++) {
+                result += listGeneralization1.getChildren().get(j);
 
-                if (j < Generalisation.getChildren().size() - 1) {
+                if (j < listGeneralization1.getChildren().size() - 1) {
                     result += ", ";
                 }
             }
@@ -246,7 +267,7 @@ public class Classe {
     	
     	//PROBLEM getChildren retourne la meme liste de children pour toutes les classes...
     
-    	return Generalisation.getChildren().size();
+    	return 0;//  Generalisation.getChildren().size();
     }
     
     //NOD(ci) : Nombre de sous-classes directes et indirectes de ci.
@@ -256,11 +277,11 @@ public class Classe {
     	
     	//PROBLEM supposer devenir ok mais rentre dans une boucle infinie pour le moment à cause de getChildren qui ne fonctionne pas...
     	
-    	for(int i = 0; i<Generalisation.getChildren().size(); i++){
+    	//for(int i = 0; i<Generalisation.getChildren().size(); i++){
     		//result += Model.getClassFromName(Generalisation.getChildren().get(i)).NOD();
     		//System.out.println("Sous-Classe :" + Generalisation.getChildren().get(i));
     		//System.out.println("Nombre de sous-classe :" + className.NOC());
-    	}
+    //	}
     	
     	return result;
     }
