@@ -166,7 +166,7 @@ public class Classe {
     //NOM(ci) : Nombre de méthodes locales/héritées de la classe
     //ci. Dans le cas où une méthode est héritée et redéfinie localement (même
     //nom, même ordre et types des arguments et même type de retour), elle ne
-    //compte qu’une fois.    
+    //compte qu’une fois. (Nedra)   
     public int NOM(){
     	int result = 0;
     	
@@ -230,7 +230,7 @@ public class Classe {
     }
     
     //CAC(ci) : Nombre d’associations (incluant les agrégations)
-    //locales/héritées auxquelles participe une classe ci.   
+    //locales/héritées auxquelles participe une classe ci. (Giancarlo)  
     public int CAC(){
     	int result = 0;
     	
@@ -243,7 +243,7 @@ public class Classe {
     }
     
     //DIT(ci) : Taille du chemin le plus long reliant une classe ci à une
-    //classe racine dans le graphe d’héritage.    
+    //classe racine dans le graphe d’héritage. (Giancarlo)   
     public int DIT(){
     	int result = 0;
     	
@@ -253,7 +253,7 @@ public class Classe {
     }
     
     //CLD(ci) : Taille du chemin le plus long reliant une classe ci à une
-    //classe feuille dans le graphe d’héritage.   
+    //classe feuille dans le graphe d’héritage. (Giancarlo)
     public int CLD(){
     	int result = 0;
     	
@@ -262,7 +262,7 @@ public class Classe {
     	return result;
     }
     
-    //NOC(ci) : Nombre de sous-classes directes de ci.
+    //NOC(ci) : Nombre de sous-classes directes de ci. (Nedra)
     public int NOC(){
     	
     	//PROBLEM getChildren retourne la meme liste de children pour toutes les classes...
@@ -270,7 +270,7 @@ public class Classe {
     	return 0;//  Generalisation.getChildren().size();
     }
     
-    //NOD(ci) : Nombre de sous-classes directes et indirectes de ci.
+    //NOD(ci) : Nombre de sous-classes directes et indirectes de ci. (Nedra)
     
     public int NOD(){
     	int result = NOC();
