@@ -319,8 +319,9 @@ public class Classe {
     //NOD(ci) : Nombre de sous-classes directes et indirectes de ci. (Nedra)
     
     public int NOD(){
-    	int result = NOC();
-    	
+    	if(this.getListGeneralization().size() >0)
+    		return recursiveNOD(this.getClassName(), this.getListGeneralization().get(0).getChildren().size());
+    	return 0;
     	//PROBLEM supposer devenir ok mais rentre dans une boucle infinie pour le moment à cause de getChildren qui ne fonctionne pas...
     	
     	//for(int i = 0; i<Generalisation.getChildren().size(); i++){
@@ -329,8 +330,43 @@ public class Classe {
     		//System.out.println("Nombre de sous-classe :" + className.NOC());
     //	}
     	
-    	return result;
+    	
     }
     
+    public static int recursiveNOD(String cName, int count){
+    	Classe current = Model.getClassFromName(cName);
+    	
+    	ArrayList<Integer> blah = new ArrayList<Integer>();
+    	if(current.getListGeneralization().size() > 0){
+    		int shit = 0;
+    		for(int i=0; i<current.getListGeneralization().size(); i++){
+    			
+    			for(int j=0; j<current.getListGeneralization().get(i).getChildren().size(); j++)
+    			{
+    				//map.put(current.getListGeneralization().get(i).getChildren().get(j), recursiveCLD(current.getListGeneralization().get(i).getChildren().get(j), count++));
+    				blah.add(recursiveNOD(current.getListGeneralization().get(i).getChildren().get(j), Model.getClassFromName(current.getListGeneralization().get(i).getChildren().get(j)).getListGeneralization().size() + 1)  );
+    			//	System.out.println("Current Node: " + current.getListGeneralization().get(i).getChildren().get(j) + " has this many children: " + blahs);
+    			
+    			}
+    		}
+    		for(int i=0; i<blah.size(); i++)
+    		{
+    			System.out.println(current.getClassName() + " Kid " + i + blah.get(i));
+    		}
+    		return sumup(blah);
+    	}
+    	
+    	return 0;
+    	
+    }
+    
+    public static int sumup(ArrayList<Integer> list)
+    {
+    	int result = 0;
+    	for(int i=0; i<list.size(); i++)
+    		result += list.get(i);
+    
+    return result;
+    }
     //FIN EXTENSION
 }
