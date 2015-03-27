@@ -6,7 +6,12 @@ public class Model {
 
     private String modelName;
     static private ArrayList<Classe> listClass;
-
+    
+    
+    static public ArrayList<Association> tempRelations;
+    static public ArrayList<Aggregation> tempAggregations; 
+    static public ArrayList<Generalisation> tempGeneralizations;
+    
     public Model() {};	
 	
     public Model(String modelName) {

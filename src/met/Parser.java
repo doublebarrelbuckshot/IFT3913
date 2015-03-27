@@ -51,6 +51,9 @@ public class Parser {
 
 	public static Model parseAndProcess(String str, ArrayList<Association> tempRelations, ArrayList<Aggregation>tempAggregations, ArrayList<Generalisation> tempGeneralizations){
 		Model pModel = new Model("");
+		pModel.tempRelations = tempRelations;
+		pModel.tempAggregations = tempAggregations;
+		pModel.tempRelations = tempRelations;
 		try{
 			
 			LinkedList<String> LL = new LinkedList<>();
@@ -378,6 +381,7 @@ public class Parser {
 				Classe classInvolvedInRelation = mod.getClassFromName(listOfRole.getClassName());
 				if (classInvolvedInRelation == null)
 					throw new MetricSyntaxException("ERROR: CLASS IN AGGREGATION/ROLE DOESN'T EXIST", gui);
+				classInvolvedInRelation.addAggregation(tempAggregations.get(i));
 			}
 			/*We add the Aggregation to the ModClass of the container */
 			container.addAggregation(tempAggregations.get(i));

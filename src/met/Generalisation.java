@@ -3,8 +3,8 @@ package met;
 import java.util.*;
 
 public class Generalisation {
-     private String parent;
-     private ArrayList<String> children;
+    private String parent;
+    private ArrayList<String> children;
 
     public Generalisation() {
         children = new ArrayList<>();
@@ -14,15 +14,15 @@ public class Generalisation {
         this.parent = parent;
     }
 
-     public String getParent() {
+    public String getParent() {
         return parent;
     }
 
     public void addChildren(String child) {
-        this.children.add(child);
+        children.add(child);
     }
 
-     public ArrayList<String> getChildren() {
+    public ArrayList<String> getChildren() {
         return children; //return list de sous-classes
     }
 

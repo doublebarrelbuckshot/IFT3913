@@ -233,12 +233,28 @@ public class Classe {
     //locales/héritées auxquelles participe une classe ci. (Giancarlo)  
     public int CAC(){
     	int result = 0;
+    	String current  = this.getClassName();
     	
-    	for(int i = 0; i < Model.getListClass().size(); i++){
-    			Classe myClass =  Model.getListClass().get(i);
-    			//System.out.println(Aggregation.getListRole());
+    	for(int i=0; i<Model.tempRelations.size(); i++){
+    		for(int k=0; k<Model.tempRelations.get(i).getListRole().size(); k++){
+    			if(Model.tempRelations.get(i).getListRole().get(k).getClassName().equals(current))
+    				result++;
+    		}
     	}
     	
+    	for(int j=0; j<Model.tempAggregations.size(); j++){
+    		if(Model.tempAggregations.get(j).getContainerClass().getClassName().equals(current))
+    			result++;
+    		else{
+    			for(int n=0; n<Model.tempAggregations.get(j).getListRole().size(); n++){
+    				if(Model.tempAggregations.get(j).getListRole().get(n).getClassName().equals(current)){
+    					result++;
+    					System.out.println(Model.tempAggregations.get(j).getContainerClass().getClassName());
+    				}
+    			}
+    		}
+    	}
+    	//////////////////////////////
     	return result;
     }
     
@@ -251,6 +267,26 @@ public class Classe {
     	
     	return result;
     }
+    
+//    public int recursiveDIT(String cName){
+//    	ArrayList<Integer> matchedGeneralizations = new ArrayList<Integer>();
+//    	for(int i=0; i<Model.tempGeneralizations.size(); i++){
+//    		if(cName.equals(Model.tempGeneralizations.get(i).getChildren()))
+//    				matchedGeneralizations.add(i);
+//    			
+//    	}
+//    	
+//    	if(matchedGeneralizations.size() == 0)
+//    		return 0;
+//    	
+//    	int Max = 0;
+//    	for(int j=0; j<matchedGeneralizations.size(); j++)
+//    	{
+//    		Max = recursiveDit(matchedGeneralizations.get(j))
+//    	}
+//    	return 1;
+//    	
+//    }
     
     //CLD(ci) : Taille du chemin le plus long reliant une classe ci à une
     //classe feuille dans le graphe d’héritage. (Giancarlo)
