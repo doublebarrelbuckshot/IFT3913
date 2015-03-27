@@ -320,7 +320,7 @@ public class Classe {
     
     public int NOD(){
     	if(this.getListGeneralization().size() >0)
-    		return recursiveNOD(this.getClassName(), this.getListGeneralization().get(0).getChildren().size());
+    		return recursiveNOD(this.getClassName());
     	return 0;
     	//PROBLEM supposer devenir ok mais rentre dans une boucle infinie pour le moment à cause de getChildren qui ne fonctionne pas...
     	
@@ -333,25 +333,39 @@ public class Classe {
     	
     }
     
-    public static int recursiveNOD(String cName, int count){
+    public static int recursiveNOD(String cName){
     	Classe current = Model.getClassFromName(cName);
     	
     	ArrayList<Integer> blah = new ArrayList<Integer>();
     	if(current.getListGeneralization().size() > 0){
     		int shit = 0;
     		for(int i=0; i<current.getListGeneralization().size(); i++){
-    			
+    			blah.add(current.getListGeneralization().get(i).getChildren().size());
     			for(int j=0; j<current.getListGeneralization().get(i).getChildren().size(); j++)
     			{
+    				
+    				System.out.println("Current: " + current.getClassName() +"     " + current.getListGeneralization().get(i).getChildren().size() );
+    				//if(Model.getClassFromName(current.getListGeneralization().get(i).getChildren().get(j)).getListGeneralization().size() > 0)
+    				//	System.out.println("SIZE OF CHILD: "+ j +"   " + Model.getClassFromName(current.getListGeneralization().get(i).getChildren().get(j)).getListGeneralization().get(0).getChildren().size());
+    				
     				//map.put(current.getListGeneralization().get(i).getChildren().get(j), recursiveCLD(current.getListGeneralization().get(i).getChildren().get(j), count++));
-    				blah.add(recursiveNOD(current.getListGeneralization().get(i).getChildren().get(j), Model.getClassFromName(current.getListGeneralization().get(i).getChildren().get(j)).getListGeneralization().size() + 1)  );
-    			//	System.out.println("Current Node: " + current.getListGeneralization().get(i).getChildren().get(j) + " has this many children: " + blahs);
+    				if(Model.getClassFromName(current.getListGeneralization().get(i).getChildren().get(j)).getListGeneralization().size() > 0){
+    				//	if(!countedCurrent){
+    				//		countedCurrent = true;
+    				//		blah.add(Model.getClassFromName(current.getListGeneralization().get(i).getChildren().get(j)).getListGeneralization().get(0).getChildren().size());
+    				//	}
+    						blah.add(recursiveNOD(current.getListGeneralization().get(i).getChildren().get(j) ));
+    				//	 System.out.println("Here");
+    				}
+    				//else blah.add(1);
+    				//else blah.add(1);
+    				//	System.out.println("Current Node: " + current.getListGeneralization().get(i).getChildren().get(j) + " has this many children: " + blahs);
     			
     			}
     		}
     		for(int i=0; i<blah.size(); i++)
     		{
-    			System.out.println(current.getClassName() + " Kid " + i + blah.get(i));
+    			//System.out.println(current.getClassName() + " Kid " + i + blah.get(i));
     		}
     		return sumup(blah);
     	}
