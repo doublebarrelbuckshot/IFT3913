@@ -1,6 +1,9 @@
 package met;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Classe {
 
@@ -249,7 +252,6 @@ public class Classe {
     			for(int n=0; n<Model.tempAggregations.get(j).getListRole().size(); n++){
     				if(Model.tempAggregations.get(j).getListRole().get(n).getClassName().equals(current)){
     					result++;
-    					System.out.println(Model.tempAggregations.get(j).getContainerClass().getClassName());
     				}
     			}
     		}
@@ -281,15 +283,29 @@ public class Classe {
     //CLD(ci) : Taille du chemin le plus long reliant une classe ci à une
     //classe feuille dans le graphe d’héritage. (Giancarlo)
     public int CLD(){
-    	int result = 0;
     	
-    	//TO DO
+    	return recursiveCLD(this.getClassName(), 0);
     	
-    	return result;
+    
     }
     
     public static int recursiveCLD(String cName, int count){
-    	return 0;
+    	Classe current = Model.getClassFromName(cName);
+    	Map<String, Integer> map = new HashMap<String, Integer>();
+
+    	ArrayList<Integer> blah = new ArrayList<Integer>();
+    	if(current.getListGeneralization().size() > 0){
+    		for(int i=0; i<current.getListGeneralization().size(); i++){
+    			for(int j=0; j<current.getListGeneralization().get(i).getChildren().size(); j++)
+    			{
+    				//map.put(current.getListGeneralization().get(i).getChildren().get(j), recursiveCLD(current.getListGeneralization().get(i).getChildren().get(j), count++));
+    				blah.add(recursiveCLD(current.getListGeneralization().get(i).getChildren().get(j), count+1));
+    			}
+    		}
+    		return Collections.max(blah);
+    	}
+    	
+    	return count;
     }
     
     //NOC(ci) : Nombre de sous-classes directes de ci. (Nedra)
