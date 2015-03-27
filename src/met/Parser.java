@@ -53,7 +53,7 @@ public class Parser {
 		Model pModel = new Model("");
 		pModel.tempRelations = tempRelations;
 		pModel.tempAggregations = tempAggregations;
-		pModel.tempRelations = tempRelations;
+		pModel.tempGeneralizations = tempGeneralizations;
 		try{
 			
 			LinkedList<String> LL = new LinkedList<>();

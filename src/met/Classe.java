@@ -261,33 +261,23 @@ public class Classe {
     //DIT(ci) : Taille du chemin le plus long reliant une classe ci à une
     //classe racine dans le graphe d’héritage. (Giancarlo)   
     public int DIT(){
-    	int result = 0;
     	
-    	//TO DO
-    	
-    	return result;
+    	return recursiveDIT(this.getClassName(), 0);
     }
     
-//    public int recursiveDIT(String cName){
-//    	ArrayList<Integer> matchedGeneralizations = new ArrayList<Integer>();
-//    	for(int i=0; i<Model.tempGeneralizations.size(); i++){
-//    		if(cName.equals(Model.tempGeneralizations.get(i).getChildren()))
-//    				matchedGeneralizations.add(i);
-//    			
-//    	}
-//    	
-//    	if(matchedGeneralizations.size() == 0)
-//    		return 0;
-//    	
-//    	int Max = 0;
-//    	for(int j=0; j<matchedGeneralizations.size(); j++)
-//    	{
-//    		Max = recursiveDit(matchedGeneralizations.get(j))
-//    	}
-//    	return 1;
-//    	
-//    }
-    
+    public static int recursiveDIT(String cName, int count){
+    	for(int i=0; i<Model.tempGeneralizations.size(); i++){
+    		for(int j=0; j<Model.tempGeneralizations.get(i).getChildren().size(); j++){
+    			if(cName.equals(Model.tempGeneralizations.get(i).getChildren().get(j)))
+    				return recursiveDIT(Model.tempGeneralizations.get(i).getParent(), count+1);
+    		}
+    	}
+    	return count;
+    	
+
+    	
+    }
+  
     //CLD(ci) : Taille du chemin le plus long reliant une classe ci à une
     //classe feuille dans le graphe d’héritage. (Giancarlo)
     public int CLD(){
@@ -296,6 +286,10 @@ public class Classe {
     	//TO DO
     	
     	return result;
+    }
+    
+    public static int recursiveCLD(String cName, int count){
+    	return 0;
     }
     
     //NOC(ci) : Nombre de sous-classes directes de ci. (Nedra)
