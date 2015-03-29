@@ -21,14 +21,14 @@ public class Test {
 			
 			System.out.println("--------------------------------------------------");
 			
-			System.out.println("\tANA(" + classList.get(i).getClassName() + ") = "+ classList.get(i).ANA());
-			System.out.println("\tNOM(" + classList.get(i).getClassName() + ") = "+ classList.get(i).NOM());
-			System.out.println("\tNOA(" + classList.get(i).getClassName() + ") = "+ classList.get(i).NOA());
-			System.out.println("\tITC(" + classList.get(i).getClassName() + ") = "+ classList.get(i).ITC());
-			System.out.println("\tETC(" + classList.get(i).getClassName() + ") = "+ classList.get(i).ETC());
-			System.out.println("\tCAC(" + classList.get(i).getClassName() + ") = "+ classList.get(i).CAC());
-			System.out.println("\tDIT(" + classList.get(i).getClassName() + ") = "+ classList.get(i).DIT());
-			System.out.println("\tCLD(" + classList.get(i).getClassName() + ") = "+ classList.get(i).CLD());
+	//		System.out.println("\tANA(" + classList.get(i).getClassName() + ") = "+ classList.get(i).ANA());
+	//		System.out.println("\tNOM(" + classList.get(i).getClassName() + ") = "+ classList.get(i).NOM());
+	//		System.out.println("\tNOA(" + classList.get(i).getClassName() + ") = "+ classList.get(i).NOA());
+	//		System.out.println("\tITC(" + classList.get(i).getClassName() + ") = "+ classList.get(i).ITC());
+	//		System.out.println("\tETC(" + classList.get(i).getClassName() + ") = "+ classList.get(i).ETC());
+	//		System.out.println("\tCAC(" + classList.get(i).getClassName() + ") = "+ classList.get(i).CAC());
+	//		System.out.println("\tDIT(" + classList.get(i).getClassName() + ") = "+ classList.get(i).DIT());
+	//		System.out.println("\tCLD(" + classList.get(i).getClassName() + ") = "+ classList.get(i).CLD());
 			
 			System.out.println("--------------------------------------------------");
 			
@@ -39,8 +39,8 @@ public class Test {
 			
 			System.out.println("--------------------------------------------------");
 			
-			System.out.println("\tNOC(" + classList.get(i).getClassName() + ") = "+ classList.get(i).NOC());
-			System.out.println("\tNOD(" + classList.get(i).getClassName() + ") = "+ classList.get(i).NOD());
+		//	System.out.println("\tNOC(" + classList.get(i).getClassName() + ") = "+ classList.get(i).NOC());
+		//	System.out.println("\tNOD(" + classList.get(i).getClassName() + ") = "+ classList.get(i).NOD());
 			
 			System.out.println("--------------------------------------------------");
 			

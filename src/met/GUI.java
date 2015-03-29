@@ -20,7 +20,8 @@ public class GUI extends JFrame implements ListSelectionListener, ActionListener
 	private final JList<String> listAttributes;
 	private final JList<String> listOperations;
 	private final JList<String> listRelations;
-
+	private final JList<String> listMetrics;
+	
 	private final JTextArea descriptionTextArea;
 
 	private final DefaultListModel<String> classDefaultModel = new DefaultListModel<>();
@@ -28,11 +29,13 @@ public class GUI extends JFrame implements ListSelectionListener, ActionListener
 	private final DefaultListModel<String> attributesDefaultModel = new DefaultListModel<>();
 	private final DefaultListModel<String> operationsDefaultModel = new DefaultListModel<>();
 	private final DefaultListModel<String> relationsDefaultModel = new DefaultListModel<>();
-
+	private final DefaultListModel<String> metricsDefaultModel = new DefaultListModel<>();
+	
 	private ArrayList<Generalisation> generalization;
 	private ArrayList<DataItem> attribute;
 	private ArrayList<Operation> operation;
 	private ArrayList<Relation> relation;
+	private ArrayList<Metrics> metric;
 
 	private Boolean programChanged = false;
 
@@ -58,6 +61,8 @@ public class GUI extends JFrame implements ListSelectionListener, ActionListener
 		JPanel southPanel = new JPanel();
 
 		this.descriptionTextArea = new JTextArea();
+		descriptionTextArea.setLineWrap(true);
+		descriptionTextArea.setWrapStyleWord(true);
 		descriptionTextArea.setPreferredSize(new Dimension (400, 150));
 		Border border = BorderFactory.createLineBorder(Color.BLACK, 1);
 		descriptionTextArea.setBorder(border);
@@ -177,11 +182,35 @@ public class GUI extends JFrame implements ListSelectionListener, ActionListener
 		relationPanel.setBorder(new TitledBorder("Associations/Agregations"));
 		relationPanel.add(relationScroller, BorderLayout.CENTER);
 
+		
+		
+		
+		/*
+		 * SETUP FOR METRICS JLIST
+		 */
+		this.listMetrics = new JList<>();
+
+		listMetrics.setModel(metricsDefaultModel);	
+		listMetrics.addListSelectionListener(this);		
+
+		JScrollPane metricsScroller = new JScrollPane(listMetrics);
+		metricsScroller.setViewportView(listMetrics);
+		metricsScroller.setPreferredSize(new Dimension(250, 200));
+
+		/*
+		 * SETUP FOR METRICS PANEL
+		 */
+		JPanel metricsPanel = new JPanel();
+		metricsPanel.setBorder(new TitledBorder("Metrics"));
+		metricsPanel.add(metricsScroller, BorderLayout.CENTER);
+
+		
+		
 
 		/*
 		 * SETUP FOR ENTIRE JPANEL
 		 */
-		setSize(1000,750);
+		setSize(1250,750);
 		JPanel squarePanel = new JPanel();
 		squarePanel.setLayout(new GridLayout(2,2));
 		squarePanel.add(attributePanel);
@@ -193,6 +222,7 @@ public class GUI extends JFrame implements ListSelectionListener, ActionListener
 		add(classPanel, BorderLayout.WEST);
 		add(squarePanel, BorderLayout.CENTER);
 		add(southPanel, BorderLayout.SOUTH);
+		add(metricsPanel, BorderLayout.EAST);
 		this.setVisible(true);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
@@ -233,6 +263,16 @@ public class GUI extends JFrame implements ListSelectionListener, ActionListener
 		return file_path;
 	}
 
+	
+	public void updateMetricList(){
+		metricsDefaultModel.clear();
+		
+		this.metric.stream().forEach((met) -> {
+			metricsDefaultModel.addElement(met.printMetric());
+		});
+		listMetrics.repaint();
+		
+	}
 	public void updateGeneralizationList(){
 		generalizationsDefaultModel.clear();
 
@@ -287,7 +327,8 @@ public class GUI extends JFrame implements ListSelectionListener, ActionListener
 					this.attribute = newlyClickedClass.getListAttribute();
 					this.operation = newlyClickedClass.getListOperation();
 					this.relation = new ArrayList<>();
-
+					this.metric = newlyClickedClass.getListMetrics();
+					
 					for(int i = 0; i<newlyClickedClass.getListAggregation().size(); i++){
 						this.relation.add((Relation)newlyClickedClass.getListAggregation().get(i));
 					}
@@ -300,6 +341,7 @@ public class GUI extends JFrame implements ListSelectionListener, ActionListener
 					updateAttributeList();
 					updateOperationList();
 					updateRelationList();
+					updateMetricList();
 
 					listGeneralizations.clearSelection();
 					listAttributes.clearSelection();
@@ -307,6 +349,8 @@ public class GUI extends JFrame implements ListSelectionListener, ActionListener
 					listRelations.clearSelection();
 					descriptionTextArea.setText("");
 
+					listMetrics.clearSelection();
+					
 					programChanged = false;
 				}
 			}
@@ -317,6 +361,7 @@ public class GUI extends JFrame implements ListSelectionListener, ActionListener
 					listGeneralizations.clearSelection();
 					listAttributes.clearSelection();
 					listOperations.clearSelection();
+					listMetrics.clearSelection();
 
 					String test = listRelations.getSelectedValue();
 					Relation newlyClickedRelation = (Relation)relation.get(listRelations.getSelectedIndex());
@@ -333,6 +378,7 @@ public class GUI extends JFrame implements ListSelectionListener, ActionListener
 					listGeneralizations.clearSelection();
 					listRelations.clearSelection();
 					listOperations.clearSelection();
+					listMetrics.clearSelection();
 
 					String test = listClasses.getSelectedValue();
 					Classe clickedAttributeClass = Model.getClassFromName(test);
@@ -350,6 +396,7 @@ public class GUI extends JFrame implements ListSelectionListener, ActionListener
 					listAttributes.clearSelection();
 					listRelations.clearSelection();
 					listOperations.clearSelection();
+					listMetrics.clearSelection();
 
 					String test = listClasses.getSelectedValue();
 					Classe clickedAttributeClass = Model.getClassFromName(test);
@@ -366,11 +413,30 @@ public class GUI extends JFrame implements ListSelectionListener, ActionListener
 					listAttributes.clearSelection();
 					listRelations.clearSelection();
 					listGeneralizations.clearSelection();
+					listMetrics.clearSelection();
 
 					String test = listClasses.getSelectedValue();
 					Classe clickedAttributeClass = Model.getClassFromName(test);
 
 					descriptionTextArea.setText(clickedAttributeClass.recreateOperationCode());
+					programChanged = false;
+				}
+			}
+			
+			else if(e.getSource().equals(listMetrics)) {
+				if(listMetrics.getSelectedIndex() != -1 && !programChanged){
+
+					programChanged = true;
+					listAttributes.clearSelection();
+					listRelations.clearSelection();
+					listGeneralizations.clearSelection();
+					listOperations.clearSelection();
+					int index = listMetrics.getSelectedIndex();
+					
+					String test = listClasses.getSelectedValue();
+					Classe clickedAttributeClass = Model.getClassFromName(test);
+
+					descriptionTextArea.setText(clickedAttributeClass.getListMetrics().get(index).getDescription());
 					programChanged = false;
 				}
 			}
@@ -384,6 +450,22 @@ public class GUI extends JFrame implements ListSelectionListener, ActionListener
 		operationsDefaultModel.clear();
 	}
 
+	public static void loadMetrics(Model mod){
+		for(int i=0; i<mod.getListClass().size(); i++)
+		{
+			Classe c = mod.getListClass().get(i);
+			c.addMetric(new ANA(c));
+			c.addMetric(new NOM(c));
+			c.addMetric(new NOA(c));
+			c.addMetric(new ITC(c));
+			c.addMetric(new ETC(c));
+			c.addMetric(new CAC(c));
+			c.addMetric(new DIT(c));
+			c.addMetric(new CLD(c));
+			c.addMetric(new NOC(c));
+			c.addMetric(new NOD(c));
+		}
+	}
 	//for the button click!
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
@@ -396,7 +478,9 @@ public class GUI extends JFrame implements ListSelectionListener, ActionListener
 
 			if(!filename.equals("") && ((extension.equals("txt"))||(extension.equals("ucd")))){
 				this.mod = Parser.launch(filename, this);
+				loadMetrics(this.mod);
 				this.loadGUIElements();	
+				
 			}
 			else{
 				JOptionPane.showMessageDialog(this, "Extension du fichier choisi est invalide, veuillez en choisir un autre.");

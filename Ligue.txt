@@ -45,8 +45,9 @@ GENERALIZATION Participant
 ;
 
 GENERALIZATION Joueur
-	SUBCLASSES Entraineur, Equipe
+	SUBCLASSES Stade, Equipe
 ;
+
 
 RELATION est_localisee_a 
        ROLES
