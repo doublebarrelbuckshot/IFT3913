@@ -21,7 +21,7 @@ public class GUI extends JFrame implements ListSelectionListener, ActionListener
 	private final JList<String> listOperations;
 	private final JList<String> listRelations;
 	private final JList<String> listMetrics;
-	
+
 	private final JTextArea descriptionTextArea;
 
 	private final DefaultListModel<String> classDefaultModel = new DefaultListModel<>();
@@ -30,7 +30,7 @@ public class GUI extends JFrame implements ListSelectionListener, ActionListener
 	private final DefaultListModel<String> operationsDefaultModel = new DefaultListModel<>();
 	private final DefaultListModel<String> relationsDefaultModel = new DefaultListModel<>();
 	private final DefaultListModel<String> metricsDefaultModel = new DefaultListModel<>();
-	
+
 	private ArrayList<Generalisation> generalization;
 	private ArrayList<DataItem> attribute;
 	private ArrayList<Operation> operation;
@@ -51,7 +51,7 @@ public class GUI extends JFrame implements ListSelectionListener, ActionListener
 		//then, it updates the GUI interface with the model's info.
 		GUI window = new GUI("TP1 - IFT3913 - Giancarlo Rizzi et Nedra Hamouda"); 
 	}	
-	
+
 	public GUI(String s){
 		super(s);
 
@@ -67,7 +67,7 @@ public class GUI extends JFrame implements ListSelectionListener, ActionListener
 		Border border = BorderFactory.createLineBorder(Color.BLACK, 1);
 		descriptionTextArea.setBorder(border);
 		descriptionTextArea.setEditable(false);
-		
+
 		southPanel.add(descriptionTextArea);
 		southPanel.setBorder(new TitledBorder("Description"));
 
@@ -81,10 +81,10 @@ public class GUI extends JFrame implements ListSelectionListener, ActionListener
 
 		FileNameLabel.setPreferredSize(new Dimension (400, 28));
 		FileNameLabel.setBorder(border);
-                FileNameLabel.setEditable(false);
+		FileNameLabel.setEditable(false);
 		loadPanel.add(FileNameLabel);
-		
-                /*
+
+		/*
 		 * SETUP FOR CLASSES JLIST
 		 */
 		this.listClasses = new JList<>();
@@ -182,9 +182,9 @@ public class GUI extends JFrame implements ListSelectionListener, ActionListener
 		relationPanel.setBorder(new TitledBorder("Associations/Agregations"));
 		relationPanel.add(relationScroller, BorderLayout.CENTER);
 
-		
-		
-		
+
+
+
 		/*
 		 * SETUP FOR METRICS JLIST
 		 */
@@ -204,8 +204,8 @@ public class GUI extends JFrame implements ListSelectionListener, ActionListener
 		metricsPanel.setBorder(new TitledBorder("Metrics"));
 		metricsPanel.add(metricsScroller, BorderLayout.CENTER);
 
-		
-		
+
+
 
 		/*
 		 * SETUP FOR ENTIRE JPANEL
@@ -228,7 +228,7 @@ public class GUI extends JFrame implements ListSelectionListener, ActionListener
 	}
 
 
-	public  void loadGUIElements( ) {
+	public void loadGUIElements( ) {
 
 		ArrayList<Classe> classes = Model.getListClass();
 
@@ -263,15 +263,15 @@ public class GUI extends JFrame implements ListSelectionListener, ActionListener
 		return file_path;
 	}
 
-	
+
 	public void updateMetricList(){
 		metricsDefaultModel.clear();
-		
+
 		this.metric.stream().forEach((met) -> {
 			metricsDefaultModel.addElement(met.printMetric());
 		});
 		listMetrics.repaint();
-		
+
 	}
 	public void updateGeneralizationList(){
 		generalizationsDefaultModel.clear();
@@ -328,7 +328,7 @@ public class GUI extends JFrame implements ListSelectionListener, ActionListener
 					this.operation = newlyClickedClass.getListOperation();
 					this.relation = new ArrayList<>();
 					this.metric = newlyClickedClass.getListMetrics();
-					
+
 					for(int i = 0; i<newlyClickedClass.getListAggregation().size(); i++){
 						this.relation.add((Relation)newlyClickedClass.getListAggregation().get(i));
 					}
@@ -350,7 +350,7 @@ public class GUI extends JFrame implements ListSelectionListener, ActionListener
 					descriptionTextArea.setText("");
 
 					listMetrics.clearSelection();
-					
+
 					programChanged = false;
 				}
 			}
@@ -422,7 +422,7 @@ public class GUI extends JFrame implements ListSelectionListener, ActionListener
 					programChanged = false;
 				}
 			}
-			
+
 			else if(e.getSource().equals(listMetrics)) {
 				if(listMetrics.getSelectedIndex() != -1 && !programChanged){
 
@@ -432,7 +432,7 @@ public class GUI extends JFrame implements ListSelectionListener, ActionListener
 					listGeneralizations.clearSelection();
 					listOperations.clearSelection();
 					int index = listMetrics.getSelectedIndex();
-					
+
 					String test = listClasses.getSelectedValue();
 					Classe clickedAttributeClass = Model.getClassFromName(test);
 
@@ -449,6 +449,60 @@ public class GUI extends JFrame implements ListSelectionListener, ActionListener
 		attributesDefaultModel.clear();
 		operationsDefaultModel.clear();
 	}
+
+
+	public static void writeMetricsToFile(){
+		String result = ",";
+		if(Model.getListClass().size()>0){
+			for(int k=0; k<Model.getListClass().get(0).getListMetrics().size(); k++){
+				result+= Model.getListClass().get(0).getListMetrics().get(k).getMetricName();
+				if(k!= Model.getListClass().get(0).getListMetrics().size()-1)
+					result+=",";
+				else result+="\n";
+			}
+		}
+
+
+		for(int i=0; i<Model.getListClass().size(); i++){
+			result += Model.getListClass().get(i).getClassName() +",";
+			for(int j=0; j<Model.getListClass().get(i).getListMetrics().size(); j++){
+				ArrayList<Metrics> classMetricList = Model.getListClass().get(i).getListMetrics();
+
+				result+= classMetricList.get(j).getMetricValue();
+				if(j!= classMetricList.size() -1)
+					result+=",";
+				else result+="\n";
+			}
+
+		}
+
+		BufferedWriter writer = null;
+		try
+		{
+		    writer = new BufferedWriter( new FileWriter( "MetricsOutput.csv"));
+		    writer.write( result);
+
+		}
+		catch ( IOException e)
+		{
+		}
+		finally
+		{
+		    try
+		    {
+		        if ( writer != null)
+		        writer.close( );
+		    }
+		    catch ( IOException e)
+		    {
+		    }
+		}
+		System.out.println(result);
+
+	}
+
+
+
 
 	public static void loadMetrics(Model mod){
 		for(int i=0; i<mod.getListClass().size(); i++)
@@ -480,7 +534,8 @@ public class GUI extends JFrame implements ListSelectionListener, ActionListener
 				this.mod = Parser.launch(filename, this);
 				loadMetrics(this.mod);
 				this.loadGUIElements();	
-				
+				writeMetricsToFile();
+
 			}
 			else{
 				JOptionPane.showMessageDialog(this, "Extension du fichier choisi est invalide, veuillez en choisir un autre.");

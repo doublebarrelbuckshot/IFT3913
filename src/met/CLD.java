@@ -48,6 +48,17 @@ public class CLD implements Metrics{
 			// TODO Auto-generated method stub
 			return "CLD(ci) : Taille du chemin le plus long reliant une classe ci à une classe feuille dans le graphe d’héritage.";
 		}
+		
+		@Override
+		public String getMetricName(){
+			return "CLD";
+		}
+		
+		
+		@Override
+		public String getMetricValue() {
+			return Integer.toString(this.Cld);
+		}
 	}
 
 ////CLD(ci) : Taille du chemin le plus long reliant une classe ci Ã  une

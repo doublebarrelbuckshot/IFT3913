@@ -34,5 +34,15 @@ public class ANA implements Metrics{
 
 		return "ANA(ci) : Nombre moyen d’arguments des méthodes locales pour la classe ci.";
 	}
+	
+	@Override
+	public String getMetricName(){
+		return "ANA";
+	}
+
+	@Override
+	public String getMetricValue() {
+		return Double.toString(this.Ana);
+	}
     
 }

@@ -23,5 +23,15 @@ public NOC(Classe c){
 		// TODO Auto-generated method stub
 		return "NOC(ci) : Nombre de sous-classes directes de ci";
 	}
+	
+	@Override
+	public String getMetricName(){
+		return "NOC";
+	}
+	
+	@Override
+	public String getMetricValue() {
+		return Integer.toString(this.Noc);
+	}
 
 }

@@ -57,5 +57,15 @@ public class DIT implements Metrics {
 		// TODO Auto-generated method stub
 		return "DIT(ci) : Taille du chemin le plus long reliant une classe ci à une classe racine dans le graphe d’héritage.";
 	}
+	
+	@Override
+	public String getMetricName(){
+		return "DIT";
+	}
+	
+	@Override
+	public String getMetricValue() {
+		return Integer.toString(this.Dit);
+	}
 
 }

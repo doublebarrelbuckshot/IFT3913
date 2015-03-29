@@ -23,5 +23,15 @@ public class NOM implements Metrics{
 		// TODO Auto-generated method stub
 		return "NOM(ci) : Nombre de méthodes locales/héritées de la classe ci. Dans le cas où une méthode est héritée et redéfinie localement (même nom, même ordre et types des arguments et même type de retour), elle ne compte qu’une fois.";
 	}
+	
+	@Override
+	public String getMetricName(){
+		return "NOM";
+	}
+	
+	@Override
+	public String getMetricValue() {
+		return Integer.toString(this.Nom);
+	}
 
 }
