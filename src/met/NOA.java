@@ -63,7 +63,7 @@ public class NOA implements Metrics{
 	@Override
 	public String getDescription() {
 		// TODO Auto-generated method stub
-		return "NOA(ci) : Nombre d’attributs locaux/hérités de la classe ci.";
+		return "NOA(ci) : Nombre d'attributs locaux/herites de la classe ci.";
 	}
 
 	@Override

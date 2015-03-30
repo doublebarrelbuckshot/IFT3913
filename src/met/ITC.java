@@ -36,7 +36,7 @@ public class ITC  implements Metrics{
 	@Override
 	public String getDescription() {
 		// TODO Auto-generated method stub
-		return "ITC(ci) : Nombre de fois où d’autres classes du diagramme apparaissent comme types des arguments des méthodes de ci.";
+		return "ITC(ci) : Nombre de fois ou d'autres classes du diagramme apparaissent comme types des arguments des methodes de ci.";
 	}
 
 	@Override

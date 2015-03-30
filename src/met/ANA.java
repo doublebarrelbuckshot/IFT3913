@@ -32,7 +32,7 @@ public class ANA implements Metrics{
 	@Override
 	public String getDescription() {
 
-		return "ANA(ci) : Nombre moyen d’arguments des méthodes locales pour la classe ci.";
+		return "ANA(ci) : Nombre moyen d'arguments des methodes locales pour la classe ci.";
 	}
 	
 	@Override

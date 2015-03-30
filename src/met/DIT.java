@@ -15,23 +15,6 @@ public class DIT implements Metrics {
 	}
 
 
-	//WORKS BUT NOT FOR HERITAGE MULTIPLE	
-	//	 public static int recursiveDIT(String cName, int count){
-	//	    	for(int i=0; i<Model.tempGeneralizations.size(); i++){
-	//	    		for(int j=0; j<Model.tempGeneralizations.get(i).getChildren().size(); j++){
-	//	    			if(cName.equals(Model.tempGeneralizations.get(i).getChildren().get(j)))
-	//	    				return recursiveDIT(Model.tempGeneralizations.get(i).getParent(), count+1);
-	//	    		}
-	//	    	}
-	//	    	return count;
-	//	    	
-	//
-	//	    	
-	//	    }
-	//	 
-
-
-	//MODIFYING!
 	public static int recursiveDIT(String cName, int count){
 		ArrayList<Integer> blah = new ArrayList<Integer>();
 		for(int i=0; i<Model.tempGeneralizations.size(); i++){
@@ -55,7 +38,7 @@ public class DIT implements Metrics {
 	@Override
 	public String getDescription() {
 		// TODO Auto-generated method stub
-		return "DIT(ci) : Taille du chemin le plus long reliant une classe ci à une classe racine dans le graphe d’héritage.";
+		return "DIT(ci) : Taille du chemin le plus long reliant une classe ci a une classe racine dans le graphe d'heritage.";
 	}
 	
 	@Override

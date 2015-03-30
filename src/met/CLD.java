@@ -46,7 +46,7 @@ public class CLD implements Metrics{
 		@Override
 		public String getDescription() {
 			// TODO Auto-generated method stub
-			return "CLD(ci) : Taille du chemin le plus long reliant une classe ci à une classe feuille dans le graphe d’héritage.";
+			return "CLD(ci) : Taille du chemin le plus long reliant une classe ci a une classe feuille dans le graphe d'heritage.";
 		}
 		
 		@Override
@@ -61,30 +61,3 @@ public class CLD implements Metrics{
 		}
 	}
 
-////CLD(ci) : Taille du chemin le plus long reliant une classe ci Ã  une
-////classe feuille dans le graphe dâ€™hÃ©ritage. (Giancarlo)
-//public int CLD(){
-//	
-//	return recursiveCLD(this.getClassName(), 0);
-//	
-//
-//}
-//
-//public static int recursiveCLD(String cName, int count){
-//	Classe current = Model.getClassFromName(cName);
-//	Map<String, Integer> map = new HashMap<String, Integer>();
-//
-//	ArrayList<Integer> blah = new ArrayList<Integer>();
-//	if(current.getListGeneralization().size() > 0){
-//		for(int i=0; i<current.getListGeneralization().size(); i++){
-//			for(int j=0; j<current.getListGeneralization().get(i).getChildren().size(); j++)
-//			{
-//				//map.put(current.getListGeneralization().get(i).getChildren().get(j), recursiveCLD(current.getListGeneralization().get(i).getChildren().get(j), count++));
-//				blah.add(recursiveCLD(current.getListGeneralization().get(i).getChildren().get(j), count+1));
-//			}
-//		}
-//		return Collections.max(blah);
-//	}
-//	
-//	return count;
-//}

@@ -64,7 +64,7 @@ public class NOM implements Metrics{
 	@Override
 	public String getDescription() {
 		// TODO Auto-generated method stub
-		return "NOM(ci) : Nombre de méthodes locales/héritées de la classe ci. Dans le cas où une méthode est héritée et redéfinie localement (même nom, même ordre et types des arguments et même type de retour), elle ne compte qu’une fois.";
+		return "NOM(ci) : Nombre de methodes locales/heritees de la classe ci. Dans le cas ou une methode est heritee et redefinie localement (meme nom, meme ordre et types des arguments et meme type de retour), elle ne compte qu'une fois.";
 	}
 	
 	@Override

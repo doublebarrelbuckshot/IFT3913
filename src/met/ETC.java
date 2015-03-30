@@ -37,7 +37,7 @@ public class ETC implements Metrics{
 	@Override
 	public String getDescription() {
 		// TODO Auto-generated method stub
-		return "ETC(ci) : Nombre de fois où ci apparaît comme type des arguments dans les méthodes des autres classes du diagramme.";
+		return "ETC(ci) : Nombre de fois ou ci apparait comme type des arguments dans les methodes des autres classes du diagramme.";
 	}
 	
 	@Override
