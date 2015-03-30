@@ -38,7 +38,7 @@ public class GUI extends JFrame implements ListSelectionListener, ActionListener
 	private ArrayList<Metrics> metric;
 
 	private Boolean programChanged = false;
-
+	private static Boolean metricsCalculated = false;
 	private String file_path;
 	JTextArea FileNameLabel = new JTextArea("");
 
@@ -78,11 +78,18 @@ public class GUI extends JFrame implements ListSelectionListener, ActionListener
 		JPanel loadPanel = new JPanel();
 		loadPanel.add(loadBtn);
 		loadBtn.addActionListener(this);
+		loadBtn.setActionCommand("1");
+
 
 		FileNameLabel.setPreferredSize(new Dimension (400, 28));
 		FileNameLabel.setBorder(border);
 		FileNameLabel.setEditable(false);
 		loadPanel.add(FileNameLabel);
+
+		JButton calcBtn = new JButton("Calculer Metriques");
+		loadPanel.add(calcBtn);
+		calcBtn.addActionListener(this);
+		calcBtn.setActionCommand("2");
 
 		/*
 		 * SETUP FOR CLASSES JLIST
@@ -195,7 +202,7 @@ public class GUI extends JFrame implements ListSelectionListener, ActionListener
 
 		JScrollPane metricsScroller = new JScrollPane(listMetrics);
 		metricsScroller.setViewportView(listMetrics);
-		metricsScroller.setPreferredSize(new Dimension(250, 200));
+		metricsScroller.setPreferredSize(new Dimension(250, 450));
 
 		/*
 		 * SETUP FOR METRICS PANEL
@@ -448,10 +455,11 @@ public class GUI extends JFrame implements ListSelectionListener, ActionListener
 		generalizationsDefaultModel.clear();
 		attributesDefaultModel.clear();
 		operationsDefaultModel.clear();
+		metricsDefaultModel.clear();
 	}
 
 
-	public static void writeMetricsToFile(){
+	public static void writeMetricsToFile(Model mod){
 		String result = ",";
 		if(Model.getListClass().size()>0){
 			for(int k=0; k<Model.getListClass().get(0).getListMetrics().size(); k++){
@@ -479,8 +487,8 @@ public class GUI extends JFrame implements ListSelectionListener, ActionListener
 		BufferedWriter writer = null;
 		try
 		{
-		    writer = new BufferedWriter( new FileWriter( "MetricsOutput.csv"));
-		    writer.write( result);
+			writer = new BufferedWriter( new FileWriter(  mod.getModelName() + ".csv"));
+			writer.write( result);
 
 		}
 		catch ( IOException e)
@@ -488,14 +496,14 @@ public class GUI extends JFrame implements ListSelectionListener, ActionListener
 		}
 		finally
 		{
-		    try
-		    {
-		        if ( writer != null)
-		        writer.close( );
-		    }
-		    catch ( IOException e)
-		    {
-		    }
+			try
+			{
+				if ( writer != null)
+					writer.close( );
+			}
+			catch ( IOException e)
+			{
+			}
 		}
 		System.out.println(result);
 
@@ -505,41 +513,60 @@ public class GUI extends JFrame implements ListSelectionListener, ActionListener
 
 
 	public static void loadMetrics(Model mod){
-		for(int i=0; i<mod.getListClass().size(); i++)
-		{
-			Classe c = mod.getListClass().get(i);
-			c.addMetric(new ANA(c));
-			c.addMetric(new NOM(c));
-			c.addMetric(new NOA(c));
-			c.addMetric(new ITC(c));
-			c.addMetric(new ETC(c));
-			c.addMetric(new CAC(c));
-			c.addMetric(new DIT(c));
-			c.addMetric(new CLD(c));
-			c.addMetric(new NOC(c));
-			c.addMetric(new NOD(c));
+		if(!metricsCalculated){
+			metricsCalculated = true;
+			for(int i=0; i<mod.getListClass().size(); i++)
+			{
+				Classe c = mod.getListClass().get(i);
+				c.addMetric(new ANA(c));
+				c.addMetric(new NOM(c));
+				c.addMetric(new NOA(c));
+				c.addMetric(new ITC(c));
+				c.addMetric(new ETC(c));
+				c.addMetric(new CAC(c));
+				c.addMetric(new DIT(c));
+				c.addMetric(new CLD(c));
+				c.addMetric(new NOC(c));
+				c.addMetric(new NOD(c));
+			}
 		}
 	}
 	//for the button click!
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		listClasses.clearSelection();
-		clearAllJList();
-		String filename = showPopUp();
-		if(!filename.equals("")){
-			String extension = filename.substring(filename.length()-3, filename.length());
-			System.out.println("extension is : " + extension);
+		int action = Integer.parseInt(arg0.getActionCommand());
+		if(action == 1){
+			
+			listClasses.clearSelection();
+			clearAllJList();
+			String filename = showPopUp();
+			if(!filename.equals("")){
+				String extension = filename.substring(filename.length()-3, filename.length());
+				System.out.println("extension is : " + extension);
 
-			if(!filename.equals("") && ((extension.equals("txt"))||(extension.equals("ucd")))){
-				this.mod = Parser.launch(filename, this);
-				loadMetrics(this.mod);
-				this.loadGUIElements();	
-				writeMetricsToFile();
-
+				if(!filename.equals("") && ((extension.equals("txt"))||(extension.equals("ucd")))){
+					this.mod = Parser.launch(filename, this);
+					metricsCalculated = false;
+					//loadMetrics(this.mod);
+					this.loadGUIElements();	
+					//writeMetricsToFile();
+					
+				}
+				else{
+					JOptionPane.showMessageDialog(this, "Extension du fichier choisi est invalide, veuillez en choisir un autre.");
+				}	
 			}
-			else{
-				JOptionPane.showMessageDialog(this, "Extension du fichier choisi est invalide, veuillez en choisir un autre.");
-			}	
+		}
+
+		else if(action == 2){
+			if(this.mod != null){
+			loadMetrics(this.mod);
+			updateMetricList();
+			//this.loadGUIElements();	
+			writeMetricsToFile(this.mod);
+			}
+			else 
+				JOptionPane.showMessageDialog(this, "Il faut charger un fichier en premiere");
 		}
 	}
 }
